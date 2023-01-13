@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  server:
+    build: server1/
+    ports:
+      - "8088:8080"
+    container_name: server
+    depends_on:
+      - db
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/demo
+#      - SPRING_DATASOURCE_USERNAME=raynor
+#      - SPRING_DATASOURCE_PASSWORD=1234
+#      - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+
+  db:
+    image: postgres:14
+    container_name: db
+    restart: always
+    environment:
+      - POSTGRES_DB=demo
+      - POSTGRES_USER=raynor
+      - POSTGRES_PASSWORD=1234
+    ports:
+      - "5555:5432"
